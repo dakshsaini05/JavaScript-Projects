@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: rgb(53, 53, 53);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            border: 1px solid black;
+            border-radius: 10px;
+            height: 250px;
+            width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: grey;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BMI Calculator</h1>
+        <form>
+            <p><input type="text" id="height" placeholder="Enter your height in m"></p>
+            <p><input type="text" id="weight" placeholder="Enter your weight in kg"></p>
+            <button>Calculate</button>
+            <div class="results"></div>
+        </form>
+    </div>
+
+    <script>
+        // Refering to the form
+        let form = document.querySelector('form');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // .value is used to get the value of the input field
+            let height = parseInt(document.querySelector('#height').value);
+            let weight = parseInt(document.querySelector('#weight').value);
+            let results = document.querySelector('.results');
+
+            if(height === '' || height < 0 || isNaN(height)) {
+                results.innerHTML = `Please give a valid height ${height}`;
+            }else if(weight === '' || weight < 0 || isNaN(weight)) {
+                results.innerHTML = `Please give a valid weight ${weight}`; 
+            } else {
+                // toFixed() is used to round the number to 2 decimal places
+                let bmi = (weight / ((height*height) / 10000)).toFixed(2);
+                // Show result 
+                results.innerHTML = `<span>Your bmi is = ${bmi}</span>`;
+            }
+            
+        })
+    </script>
+</body>
+</html>
